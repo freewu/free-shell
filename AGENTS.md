@@ -53,6 +53,17 @@ just test         # 仅 Rust 测试（含端到端）
 just e2e-ui       # 真实窗口 + CDP 的整机端到端（仅 Windows）
 ```
 
+## 设计与品牌
+
+- 品牌色（主题色）是 **`#98d98e`**，定义在 `src/styles.css` 的 `--accent`；
+  `--accent-2`（`#5bb479`）用于渐变，`--accent-contrast`（`#06140a`）是**压在品牌色上的文字颜色**。
+  品牌色偏亮，**禁止**在 `--accent` 背景上写白字。
+- 换主题色时必须一起改的地方：`src/styles.css` 的 `--accent*`、`TerminalPane.tsx` 里 xterm 的
+  `cursor`、`Sidebar.tsx` / `BatchPanel.tsx` 里的默认会话色、`SessionModal.tsx` 的 `COLORS` 调色板。
+- 应用图标源文件是 `assets/logo.png`（256×256，透明底 + 单色 `#98d98e` 图形），用 `just icon`
+  重新生成 `src-tauri/icons/`；窗口本身也配成深色（`src-tauri/tauri.conf.json` 窗口里的
+  `backgroundColor` + `theme: Dark`）。
+
 ## 环境注意事项（Windows + WSL）
 
 - WSL 里的 git 没有全局 `user.name` / `user.email`（Windows 侧有）。本仓库已设置

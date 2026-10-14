@@ -46,6 +46,25 @@ const DRIVER = `(async () => {
 
   // --- the app is mounted and loading from disk ---------------------------
   record('app mounted', await until(() => document.querySelector('#root')?.children.length > 0));
+
+  // --- theme: brand colour is wired through the CSS variables -------------
+  // (wait for the stylesheet: the driver may attach before the first paint)
+  const accent = await until(() => {
+    const value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    return value === '#98d98e' ? value : null;
+  });
+  record('theme accent is the brand green', !!accent, accent ?? 'not applied yet');
+
+  const primary = await until(() => {
+    const el = document.querySelector('.btn-primary');
+    if (!el) return null;
+    const cs = getComputedStyle(el);
+    const bg = cs.backgroundImage + ' ' + cs.backgroundColor;
+    return bg.includes('152, 217, 142') ? { bg, fg: cs.color } : null;
+  });
+  record('primary button paints the brand colour', !!primary, primary ? primary.bg.slice(0, 90) : 'not painted yet');
+  // The brand colour is light: text on top of it must be dark, never white.
+  record('primary button keeps readable contrast', primary?.fg === 'rgb(6, 20, 10)', primary?.fg ?? 'n/a');
   const item = await until(() =>
     [...document.querySelectorAll('.session-item')].find((el) =>
       el.innerText.includes(SESSION_ID),

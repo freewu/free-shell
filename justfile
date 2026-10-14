@@ -107,6 +107,6 @@ clean:
     cargo clean --manifest-path src-tauri/Cargo.toml
     Remove-Item -Recurse -Force dist, node_modules -ErrorAction SilentlyContinue
 
-# Generate application icons from assets/icon.svg
+# Generate application icons from assets/logo.png
 icon:
-    npm run tauri icon assets/icon.svg
+    npm run tauri icon assets/logo.png

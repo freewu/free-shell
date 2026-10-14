@@ -10,7 +10,7 @@ interface Props {
   onClose: () => void;
 }
 
-const COLORS = ["#38bdf8", "#34d399", "#fbbf24", "#f87171", "#c084fc", "#22d3ee"];
+const COLORS = ["#98d98e", "#34d399", "#fbbf24", "#f87171", "#c084fc", "#22d3ee"];
 
 function blankSession(): Session {
   return {

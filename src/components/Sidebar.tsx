@@ -112,7 +112,7 @@ export function Sidebar({ onConnect, onNewSession, onEditSession, onOpenSettings
                 >
                   <span
                     className="session-color"
-                    style={{ background: session.color || "#38bdf8" }}
+                    style={{ background: session.color || "#98d98e" }}
                   />
                   <div className="session-meta">
                     <div className="session-name">{session.name}</div>

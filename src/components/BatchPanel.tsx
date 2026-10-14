@@ -151,7 +151,7 @@ function TargetPicker({ sessions }: { sessions: Session[] }) {
                 checked={selected.has(s.id)}
                 onChange={() => toggle(s.id)}
               />
-              <span className="session-color" style={{ background: s.color || "#38bdf8" }} />
+              <span className="session-color" style={{ background: s.color || "#98d98e" }} />
               <span className="target-name">{s.name}</span>
               <span className="muted target-host">{s.host}</span>
               <span className={`status-dot status-${status ?? "idle"}`} />

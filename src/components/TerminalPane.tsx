@@ -34,7 +34,7 @@ export function TerminalPane({ sessionId, active }: Props) {
       theme: {
         background: "#0b1120",
         foreground: "#e2e8f0",
-        cursor: "#38bdf8",
+        cursor: "#98d98e",
         selectionBackground: "#33415580",
         black: "#1e293b",
         red: "#f87171",
