@@ -1,0 +1,51 @@
+[package]
+name = "free-shell"
+version = "0.1.0"
+description = "A modern SSH client with batch execution"
+authors = ["free-shell"]
+edition = "2021"
+rust-version = "1.89"
+
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+[lib]
+name = "free_shell_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[features]
+# Used by `tauri build` and `cargo build --features custom-protocol` so the
+# binary serves the bundled frontend assets instead of the vite dev server.
+custom-protocol = ["tauri/custom-protocol"]
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+tauri-plugin-dialog = "2"
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time", "net", "io-util", "process"] }
+
+# Pure-rust SSH. `ring` avoids the cmake/nasm requirement of aws-lc-rs.
+russh = { version = "0.64", default-features = false, features = ["ring", "rsa", "flate2"] }
+
+base64 = "0.22"
+uuid = { version = "1", features = ["v4"] }
+
+log = "0.4"
+
+[dev-dependencies]
+# `test` unlocks `tauri::test::mock_app` for the integration tests.
+tauri = { version = "2", features = ["test"] }
+rand = { version = "0.10", features = ["thread_rng"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
