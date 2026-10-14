@@ -55,6 +55,9 @@ just e2e-ui       # 真实窗口 + CDP 的整机端到端（仅 Windows）
 
 ## 环境注意事项（Windows + WSL）
 
+- WSL 里的 git 没有全局 `user.name` / `user.email`（Windows 侧有）。本仓库已设置
+  repo-local 身份 `bluefrog <bluefrog.wu@gmail.com>`；若 `git commit` 报
+  `Committer identity unknown`，先补上再提交，不要用 `--author` 之类临时绕过。
 - 从 WSL 调 Windows 工具：`cmd.exe /c "cd /d E:\work\github\free-shell && <cmd>"`。
 - **不要**把复杂 PowerShell 内联进 `-Command`（转义会把变量吃掉），写成 `.ps1` 后用
   `powershell -NoProfile -ExecutionPolicy Bypass -File <path>` 执行。
